@@ -5,13 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DamD-O · Backend Developer</title>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
   @font-face {
     font-family: 'Pretendard';
     src: url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/woff2/PretendardVariable.woff2') format('woff2-variations');
     font-weight: 45 920;
   }
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 
   :root{
     --bg: #faf9f5;
@@ -44,7 +46,6 @@
     padding: 0 24px;
   }
 
-  /* ---- top status bar ---- */
   .statusbar{
     border-bottom: 1px solid var(--line);
     padding: 14px 0;
@@ -59,18 +60,9 @@
     box-shadow: 0 0 8px var(--accent);
   }
 
-  /* ---- hero ---- */
   header.hero{
     padding: 72px 0 56px;
   }
-  .eyebrow{
-    font-family:'JetBrains Mono', monospace;
-    color: var(--accent);
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    margin-bottom: 18px;
-  }
-  .eyebrow::before{ content:"$ whoami"; color: var(--text-dim); display:block; margin-bottom:6px; }
   h1{
     font-family:'JetBrains Mono', monospace;
     font-size: clamp(2rem, 6vw, 3.2rem);
@@ -100,7 +92,6 @@
   }
   .stat span{ font-size: 0.82rem; color: var(--text-dim); }
 
-  /* ---- section shell ---- */
   section{ padding: 52px 0; border-top: 1px solid var(--line); }
   .tag{
     font-family:'JetBrains Mono', monospace;
@@ -118,8 +109,11 @@
     margin: 0 0 28px;
     font-weight: 700;
   }
+  h5.sub{
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing:0.06em;
+    color: var(--text-dim); margin: 36px 0 12px;
+  }
 
-  /* ---- career log ---- */
   .log-entry{
     border-left: 2px solid var(--line);
     padding: 2px 0 26px 22px;
@@ -142,7 +136,6 @@
   .log-entry li{ margin-bottom: 6px; }
   .log-entry li::marker{ color: var(--accent); }
 
-  /* ---- skills ---- */
   .skill-grid{
     display:grid;
     grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
@@ -164,7 +157,6 @@
     margin:0; font-size: 0.85rem; color: var(--text-dim);
   }
 
-  /* ---- projects ---- */
   .project{
     background: var(--bg-raised);
     border: 1px solid var(--line);
@@ -178,6 +170,12 @@
     margin-bottom: 4px;
   }
   .project-head h3{ margin:0; font-size: 1.15rem; }
+  .badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--amber);
+    border: 1px solid var(--amber); border-radius: 20px;
+    padding: 2px 10px;
+  }
   .project-meta{
     font-family:'JetBrains Mono', monospace;
     font-size: 12px; color: var(--text-dim);
@@ -198,22 +196,23 @@
     border: 1px solid var(--line); border-radius: 20px;
     padding: 3px 10px;
   }
-
-  .project.compact{
-    display:flex; justify-content:space-between; align-items:center;
-    padding: 18px 22px;
-  }
-  .project.compact h3{ font-size: 1rem; margin:0 0 4px; }
-  .project.compact p{ margin:0; color: var(--text-dim); font-size: 0.85rem; }
-  .project.compact a{
+  .project-links{ margin-top: 16px; }
+  .project-links a, .project.compact a{
     font-family:'JetBrains Mono', monospace;
     font-size: 12px; color: var(--accent); text-decoration:none;
     border: 1px solid var(--accent-dim); border-radius: 6px;
-    padding: 6px 12px; white-space:nowrap;
+    padding: 6px 12px; white-space:nowrap; display:inline-block;
   }
-  .project.compact a:hover{ background: rgba(15,118,110,0.08); }
+  .project-links a:hover, .project.compact a:hover{ background: rgba(15,118,110,0.08); }
 
-  /* ---- contact ---- */
+  .project.compact{
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 18px 22px; margin-bottom: 14px;
+  }
+  .project.compact h3{ font-size: 1rem; margin:0 0 4px; }
+  .project.compact p{ margin:0; color: var(--text-dim); font-size: 0.85rem; }
+  .project.compact .pill-line{ margin-top: 8px; font-family:'JetBrains Mono', monospace; font-size: 11px; color: var(--text-dim); }
+
   .contact-grid{
     display:grid; grid-template-columns: 1fr 1fr; gap: 14px;
   }
@@ -227,8 +226,8 @@
     display:block; font-family:'JetBrains Mono', monospace;
     font-size: 11px; color: var(--accent); margin-bottom: 6px;
   }
-  .field .placeholder{
-    color: var(--text-dim); font-size: 0.9rem;
+  .field .placeholder, .field a{
+    color: var(--text-dim); font-size: 0.9rem; text-decoration: none; word-break: break-all;
   }
 
   footer{
@@ -258,43 +257,61 @@
   <header class="hero">
     <div class="wrap">
       <h1>김예담<span class="cursor">&nbsp;</span></h1>
-      <p class="role">백엔드 / 서버 개발자 &nbsp;·&nbsp; <span class="amber">수행개발팀 사원 3년차</span></p>
+      <p class="role">백엔드 / 서버 개발자 &nbsp;·&nbsp; <span class="amber">IAM 솔루션 개발 3년 6개월</span></p>
       <div class="stat-row">
-        <div class="stat"><b>3yr+</b><span>실무 경력</span></div>
-        <div class="stat"><b>IAM</b><span>구축 · 고도화 · 이관</span></div>
+        <div class="stat"><b>3y 6m</b><span>실무 경력 (2022.09 – 2026.02)</span></div>
+        <div class="stat"><b>IAM</b><span>운영 · 고도화 · 신규 구축</span></div>
         <div class="stat"><b>Java / Spring</b><span>주력 스택</span></div>
+        <div class="stat"><b>정보처리기사 · SQLD</b><span>2026 취득</span></div>
       </div>
     </div>
   </header>
+
   <section id="career">
     <div class="wrap">
       <span class="tag">career.log</span>
       <h2>경력</h2>
 
       <div class="log-entry">
-        <div class="log-meta">CURRENT · 수행개발팀 · 사원 3년차</div>
-        <h3>[IAM 구축 / 커스텀]</h3>
+        <div class="log-meta">2022.09 – 2026.02 · 수행개발팀 · 사원</div>
+        <h3>IAM 솔루션 구축 · 운영 · 고도화</h3>
+      </div>
+
+      <div class="log-entry">
+        <div class="log-meta">2025.08 – 2025.12 · 상주</div>
+        <h3>IAM 신규 구축 (사용자 약 200명)</h3>
         <ul>
-          <li>IAM 솔루션 상주 구축, 운영 및 고객 요구사항 커스텀 개발</li>
           <li>Java / JDBC 기반 운영 DB 계정·권한 연동 어댑터 구현</li>
-          <li>배치 모듈 활용 메일 알림 및 JS/jQuery 커스텀 UI 개발</li>
+          <li>배치 모듈을 활용한 메일 알림 개발</li>
+          <li>JS / jQuery 기반 커스텀 UI 개발</li>
         </ul>
       </div>
 
       <div class="log-entry">
-        <div class="log-meta">[IAM 고도화 / 이관]</div>
+        <div class="log-meta">2024.09 – 2025.07 · 상주</div>
+        <h3>IAM 고도화 · 신규 버전 이관 (사용자 약 1만 명)</h3>
         <ul>
-          <li>신규 버전 IAM 구축 및 레거시 코드 분석 / 재구현</li>
-          <li>기능 동일성 검증 및 기존 계정 · 권한 데이터 이관</li>
+          <li>연동 시스템 약 200여 개 대상 연동 현황 분석 및 기능 동일성 검증</li>
+          <li>기존 배치 로직 항목별 분석 후 테스트 케이스 구성, 불일치 항목 조치</li>
+          <li>기존 계정 · 권한 데이터 이관, 오픈 당일 연동 상태 확인</li>
         </ul>
       </div>
 
       <div class="log-entry">
-        <div class="log-meta">2022.02.07 – 2022.07.21 · 구디아카데미</div>
-        <h3>[스마트혼합] 공공데이터 융합 자바/스프링 개발자 양성과정 (19회차)</h3>
+        <div class="log-meta">2023.05 – 2024.06</div>
+        <h3>IAM 운영 (사용자 1만 명 이상)</h3>
         <ul>
-          <li>총 102일 / 899시간 수료</li>
-          <li>Web: HTML, CSS &nbsp;·&nbsp; DB: MariaDB &nbsp;·&nbsp; Server: Spring Framework, JSP, Tomcat &nbsp;·&nbsp; Programming: Java</li>
+          <li>운영 중 발생한 오류 개선</li>
+          <li>고객사 신규 요청 사항 개발</li>
+        </ul>
+      </div>
+
+      <div class="log-entry">
+        <div class="log-meta">2022.12 – 2023.01</div>
+        <h3>화면 개발 (화면 10개)</h3>
+        <ul>
+          <li>JS / jQuery 기반 UI 개발</li>
+          <li>Ajax를 활용한 화면 처리</li>
         </ul>
       </div>
     </div>
@@ -307,35 +324,35 @@
       <div class="skill-grid">
         <div class="skill-card">
           <h4>Java</h4>
-          <p>클래스/메서드 설계, 상속·추상클래스, 예외처리, java.lang 패키지 및 IO 클래스 활용</p>
-        </div>
-        <div class="skill-card">
-          <h4>JSP</h4>
-          <p>Oracle DB 연동 웹페이지 제작, Model2 처리 구현, 쿠키/세션 개념 이해 및 구현</p>
+          <p>JDBC 기반 DB 계정·권한 연동 어댑터 구현, 배치 로직 분석</p>
         </div>
         <div class="skill-card">
           <h4>Spring Framework</h4>
-          <p>DI / AOP 개념 이해, JDBC 연동, MyBatis 기반 DB 처리, Maven 프로젝트 구성</p>
+          <p>Spring MVC, DI / AOP, MyBatis 기반 DB 처리, Maven 프로젝트 구성</p>
         </div>
         <div class="skill-card">
-          <h4>MySQL / MariaDB</h4>
-          <p>DML/DDL, 서브쿼리, Join, 제약조건, DB 서버 설치 및 초기 설정</p>
+          <h4>Oracle / MySQL / MariaDB</h4>
+          <p>DML / DDL, 서브쿼리, Join, 제약조건 · SQL 개발자(SQLD)</p>
+        </div>
+        <div class="skill-card">
+          <h4>JSP</h4>
+          <p>Model1 / Model2 웹페이지 구현, 쿠키 / 세션 처리</p>
+        </div>
+        <div class="skill-card">
+          <h4>JavaScript / jQuery / Ajax</h4>
+          <p>커스텀 UI 및 화면 오류 수정, 소스 응용 개발</p>
         </div>
         <div class="skill-card">
           <h4>HTML5 / CSS3</h4>
-          <p>폼 요소 및 유효성 처리, 유형별 스타일 선언을 통한 반응형 화면 구성</p>
+          <p>폼 요소 및 유효성 처리, 반응형 화면 구성</p>
         </div>
         <div class="skill-card">
-          <h4>JavaScript / jQuery</h4>
-          <p>변수 특성과 범위 이해, 커스텀 UI 및 소스 응용 개발</p>
+          <h4>IAM 솔루션</h4>
+          <p>연동 어댑터, 배치, 프로비전 데이터, 메일 알림 배치</p>
         </div>
         <div class="skill-card">
-          <h4>Apache Maven</h4>
-          <p>pom.xml 빌드 설정 및 외부 라이브러리 디펜던시 관리</p>
-        </div>
-        <div class="skill-card">
-          <h4>Git / GitHub</h4>
-          <p>커밋·푸시·풀·브랜치 활용, 저장소 생성 및 협업(Collaborator) 운영</p>
+          <h4>Git / GitHub / SVN</h4>
+          <p>브랜치 활용, 저장소 생성 및 협업(Collaborator) 운영</p>
         </div>
       </div>
     </div>
@@ -345,6 +362,32 @@
     <div class="wrap">
       <span class="tag">projects/</span>
       <h2>프로젝트</h2>
+
+      <h5 class="sub" style="margin-top:0;">진행 중인 개인 프로젝트</h5>
+      <div class="project">
+        <div class="project-head">
+          <h3>MFV – 정육점·과일·채소 온라인 쇼핑몰</h3>
+          <span class="badge">IN PROGRESS</span>
+        </div>
+        <div class="project-meta">2026.07 – 진행 중 &nbsp;·&nbsp; 개인</div>
+        <p class="desc">정육점·과일·채소를 온라인으로 주문하는 쇼핑몰입니다. 백엔드 API 설계·구현부터 화면까지 직접 개발하고 있습니다.</p>
+        <h5>구현 내용</h5>
+        <ul>
+          <li>Spring Security 세션 인증(BCrypt)과 회원·관리자 권한 분리, 상품·주문·결제(Mock)·포인트·리뷰·QnA·배송지 도메인별 REST API</li>
+          <li>Spring AI + Google Gemini 연동 — 레시피 입력 시 LLM의 JSON 응답을 등록 상품과 매칭해 추천</li>
+          <li>주문·결제 정합성 — 재고 차감·취소 복구, 트랜잭션·롤백, 결제 대기 포인트를 제외한 가용 포인트 계산으로 중복 사용 방지, 배송 완료 시 1회 적립</li>
+          <li>서버 측 검증 — 배송지 소유자 검증·소프트 삭제, 판매 중지 상품 주문 차단, 공통 예외 처리</li>
+          <li>Docker MySQL 구성, Swagger API 문서화, Oracle Cloud VM 배포 예정</li>
+        </ul>
+        <div class="stack-pills">
+          <span class="pill">Java 17</span><span class="pill">Spring Boot</span><span class="pill">Gradle</span><span class="pill">Spring Security</span><span class="pill">JPA</span><span class="pill">MySQL</span><span class="pill">Spring AI</span><span class="pill">Docker</span><span class="pill">Bootstrap</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/DamD-O/mfv-shop.git" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+
+      <h5 class="sub">팀 프로젝트 · 구디아카데미 Java / Spring 과정 (2022.02 – 2022.07, 899시간)</h5>
 
       <div class="project">
         <div class="project-head">
@@ -385,7 +428,7 @@
         </div>
       </div>
 
-      <h5 style="margin-top:36px;">개인 프로젝트</h5>
+      <h5 class="sub">개인 프로젝트</h5>
       <div class="project compact">
         <div>
           <h3>Cashbook</h3>
@@ -417,21 +460,18 @@
       <div class="contact-grid">
         <div class="field">
           <label>EMAIL</label>
-          <div class="placeholder">yedam5063@naver.com</div>
+          <a href="mailto:madey0012@naver.com">madey0012@naver.com</a>
         </div>
         <div class="field">
           <label>GITHUB</label>
-          <div class="placeholder">github.com/DamD-O</div>
-        </div>
-        <div class="field">
-          <label>PHONE</label>
-          <div class="placeholder">010.5073.8237</div>
+          <a href="https://github.com/DamD-O" target="_blank" rel="noopener">github.com/DamD-O</a>
         </div>
       </div>
     </div>
   </section>
+
   <footer>
-    <div class="wrap">&copy; DamD-O · built with GitHub Pages</div>
+    <div class="wrap">built with GitHub Pages</div>
   </footer>
 
 </body>
