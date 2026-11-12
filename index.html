@@ -363,33 +363,35 @@
       <span class="tag">projects/</span>
       <h2>프로젝트</h2>
 
-      <h5 class="sub" style="margin-top:0;">진행 중인 개인 프로젝트</h5>
+            <h5 class="sub" style="margin-top:0;">대표 프로젝트</h5>
       <div class="project">
         <div class="project-head">
           <h3>MFV – 정육점·과일·채소 온라인 쇼핑몰</h3>
-          <span class="badge">IN PROGRESS</span>
+          <span class="badge">LIVE</span>
         </div>
-        <div class="project-meta">2026.07 – 진행 중 &nbsp;·&nbsp; 개인</div>
-        <p class="desc">정육점·과일·채소를 온라인으로 주문하는 쇼핑몰입니다. 백엔드 API 설계·구현부터 화면, 서버 배포까지 직접 진행했습니다.</p>
+        <div class="project-meta">2026.07 – 2026.11 &nbsp;·&nbsp; 개인</div>
+        <p class="desc">정육점·과일·채소를 온라인으로 주문하는 쇼핑몰입니다. 요구사항·ERD 설계부터 백엔드 API, 화면, 테스트, 서버 배포와 CI/CD까지 직접 진행했습니다.</p>
         <h5>구현 내용</h5>
         <ul>
           <li>Spring Security 세션 인증(BCrypt)과 회원·관리자 권한 분리, 상품·주문·결제(Mock)·포인트·리뷰·Q&amp;A·배송지·고객센터 도메인별 REST API</li>
-          <li>Spring AI + Google Gemini 연동 — 판매 중인 상품 목록을 프롬프트에 넣어 레시피와 구매 가능한 상품 추천, 모든 페이지에서 여는 플로팅 모달</li>
-          <li>주문·결제 정합성 — 허용된 주문 상태 전이만 처리, 재고 차감·취소 복구, 결제 대기 포인트를 제외한 가용 포인트 계산, 배송 완료 시 1회 적립</li>
+          <li>주문·결제 정합성 — 허용된 주문 상태 전이만 처리, 취소 시 재고·포인트 복구, 배송 완료 시 1회 적립</li>
+          <li>재고 동시 주문 — 비관적 락(<span class="mono">SELECT … FOR UPDATE</span>)으로 초과 판매 방지, 재고 1개에 10건 동시 주문 시 1건만 성공 확인</li>
+          <li>성능 — 주문 목록 N+1을 양방향 연관관계 제거 + <span class="mono">IN</span> 조회 1번으로 개선, 배치 페치로 연관 조회 묶음</li>
+          <li>보안 / 예외 — 의도한 예외만 400·그 외 500 분리, 업로드 확장자·용량 검사, 로그인 redirect 검증, XSS 방지, 타인 리소스 존재 여부 노출 방지</li>
+          <li>Spring AI + Google Gemini — 구매 가능한 상품(판매 중 + 재고 있음)을 프롬프트에 넣어 레시피·상품 추천, 모든 페이지 플로팅 모달</li>
           <li>관리자 — 대시보드(DB 집계 + Chart.js), 상품·주문·회원·Q&amp;A·공지 관리, 공통 페이징 응답</li>
-          <li>개인정보 보호 — 탈퇴 시 soft delete + 개인정보 마스킹, 비밀글 / 작성자 마스킹, XSS 방지 출력 처리</li>
-          <li>Oracle Cloud VM 배포 (Docker MySQL, systemd 상시 실행), Swagger API 문서화</li>
+          <li>테스트 케이스 154개 작성·전체 수행, 발견한 버그 수정 후 재테스트</li>
+          <li>Oracle Cloud VM 배포 (Docker MySQL, systemd), GitHub Actions로 push 시 빌드 → SSH 자동 배포, Swagger API 문서</li>
         </ul>
         <div class="stack-pills">
-          <span class="pill">Java 17</span><span class="pill">Spring Boot</span><span class="pill">Gradle</span><span class="pill">Spring Security</span><span class="pill">JPA</span><span class="pill">MySQL</span><span class="pill">Spring AI</span><span class="pill">Docker</span><span class="pill">Oracle Cloud</span><span class="pill">Bootstrap</span><span class="pill">Chart.js</span>
+          <span class="pill">Java 17</span><span class="pill">Spring Boot</span><span class="pill">Gradle</span><span class="pill">Spring Security</span><span class="pill">JPA</span><span class="pill">MySQL</span><span class="pill">Spring AI</span><span class="pill">Docker</span><span class="pill">Oracle Cloud</span><span class="pill">GitHub Actions</span><span class="pill">Bootstrap</span><span class="pill">Chart.js</span>
         </div>
-        <!-- <div class="project-links">
+        <div class="project-links">
           <a href="http://161.33.137.45:8080/index.html" target="_blank" rel="noopener">Demo ↗</a>
           <a href="http://161.33.137.45:8080/swagger-ui/index.html" target="_blank" rel="noopener">API Docs ↗</a>
-          <a href="https://github.com/DamD-O/mfv-shop" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/DamD-O/mfv-shop" target="_blank" rel="noopener">GitHub · README ↗</a>
         </div>
-        <p class="mono" style="font-size:12px; color:var(--text-dim); margin:12px 0 0;">데모 계정 testUser01 / test202611@ · 포트폴리오용 데모 서버로 실제 개인정보는 입력하지 마세요</p>
--->
+        <p class="mono" style="font-size:12px; color:var(--text-dim); margin:12px 0 0;">데모 계정 user01 / Test2026!@! · 포트폴리오용 데모 서버로 실제 개인정보는 입력하지 마세요</p>
       </div>
 
       <h5 class="sub">팀 프로젝트 · 구디아카데미 Java / Spring 과정 (2022.02 – 2022.07, 899시간)</h5>
